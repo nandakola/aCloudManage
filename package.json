@@ -1,0 +1,20 @@
+{
+  "name": "azure-nodejs",
+  "version": "1.0.0",
+  "description": "Azure Functions sample for the Serverless framework",
+  "main": "handler.js",
+  "keywords": [
+    "azure",
+    "serverless"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
+    "azure-arm-compute": "^5.1.1",
+    "eslint": "^4.19.1",
+    "js-yaml": "^3.11.0",
+    "ms-rest-azure": "^2.5.5",
+    "sendgrid": "^5.2.3",
+    "yamljs": "^0.3.0"
+  }
+}

@@ -1,0 +1,54 @@
+# Set a username here
+userName: Nanda
+ 
+
+# clientId : '<clientId>'
+# domain : '<tenantId>'
+# secret : '<clientSecret>'
+# subscriptionId : '<subscriptionId>'
+
+clientId : '1fe58029-5c78-4f7e-894e-d9cf38f3db45'
+domain : 'de40cfef-d4d5-4da7-92b6-7b45f3cb59a8'
+secret : 'e0c83ba9-f714-442f-8559-aefb97be7e5d'
+subscriptionId : 'ee9da816-cf13-4917-a47e-378f99d1d3f1'
+
+sendgridKey : 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
+
+serverSchedule:
+  - instanceName : Dhani-UB-001
+    resourceGroupName : Rs-Group-01
+    startTime : "12:10" #in quotes 24 hr format
+    shutDownTime: "12:20" #in quotes 24 hr format
+    includeWeekends : true
+    enable : true
+  
+  - instanceName : Nan-UB-001
+    resourceGroupName : Rs-Group-02
+    startTime : "12:10" #in quotes 24 hr format
+    shutDownTime: "12:20" #in quotes 24 hr format
+    includeWeekends : true
+    enable : true
+
+startUpEmail :
+  toEmail : gopalnk@gmail.com
+  fromEmail : no-reply@amanage.com
+  subject : "###Server Start UP ###"
+  bodyText : The VM is being started
+  scheduledBodyText : VM is scheduled to be started
+  htmlText : '<p>The servre is being started</p><strong>If you Have any questions Plese contact your admin</strong>'
+  scheduledSubject : "###Server Start  up in next 30 mins ###"
+  scheduledText : '<strong>Your Server is scheduled to start in next 30 mins </strong> <p> Please contact your admin Blah blah</p>'
+
+shutdownEmail :
+  toEmail : gopalnk@gmail.com
+  fromEmail : no-reply@amanage.com
+  subject : "###Server Shut down ###"
+  bodyText : VM shutdown has been initiated.
+  scheduledBodyText : VM is scheduled to be shutdown
+  htmlText : '<p>Server shutdown has been initiated.</><strong>If you Have any questions Plese contact your admin</strong>'
+  scheduledSubject : "###Server shut down in next 30 mins ###"
+  scheduledText : '<strong>Your Server is scheduled to shutdown in next 30 mins </strong> <p> Please contact your admin Blah blah</p>'
+  
+
+
+   
