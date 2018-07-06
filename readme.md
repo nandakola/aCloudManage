@@ -10,6 +10,36 @@ VM config info will be provided as input in a YML file, including starup and shu
 - Send emails before startup/shutdown
 - Send reminder emails
 
+## Usage
+
+Login to Azure PS and create a function app
+
+```
+az functionapp create --name <function App name> --storage-account <storage account> --consumption-plan-location <location/eastus> --resource-group <resource group name>
+```
+> Note: If you get an error try changing the functionapp name
+
+after creating the function app , deploy the app from github directly.
+
+```
+az functionapp deployment source config --name <function App name> --resource-group <resource group name> --branch master --repo-url https://github.com/nandakola/aCloudManage --manual-integration
+```
+hang on tight , it will take sometime... once the dpeloyment is completed got to Azure portal and stop the app , we need to update the Azure configuration before we run it.
+
+Azure function app screen you will find an URL to the function app, copy that it will look something like bellow.
+
+>https:// /{functionAppname}.azurewebsites.net
+
+Add .scm after functionappname and access [kudu](https://github.com/projectkudu/kudu) url.
+
+>https:// /{functionAppname}.scm.azurewebsites.net
+
+once you are in kudu click on "Debug console" -> "PowerShell" this will allow you to browse the site assets that you deployed using az command.
+
+now go to "site" -> "wwwroot" -> "aManageTrigger "  and click edit button for  "amcloud.yml" this is where most of the configurations are, you need to update this while with your severs information annd start/stop timings.
+
+apart form this there is one more configuration that u"ll need to updat is on local.settings.json which will be in project root folder ("site" -> "wwwroot") . i think apart form httpstrigger type function all other function types need a storage account. Update "AzureWebJobsStorage" value with one storage URL form your account. ---> rest of the app configuration is in the next section.
+
 ## Configuration
 
 After Git pull update the YML `amcloud.yml` file in the "amanageTrigger" folder with the Azure account info.
@@ -55,19 +85,6 @@ serverSchedule:
     ....
 ```
 Finally update email config info as per your requirements, right now AcloudManage is scheduled to send an email before the server startup/shutdown and one email as a remainder just before the 30 mins of the schedule startup/shutdown.(Its hard coded feel free to modify according to your requirements.)
-
-## Usage
-
-Easiest way to run this is by installing Azure function [CLI Version 2](https://docs.microsoft.com/en-us/azure/azure-functions/functions-run-local)
-
-```
-npm install -g azure-functions-core-tools@core
-```
-
-you can run this locally on your machine by using `func host start` ,for that you have ot create a local  --contd
-
-
-
 
 # About Azure TimerTrigger - JavaScript
 
