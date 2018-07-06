@@ -1,8 +1,8 @@
 # AcloudManage (Azure Cloud Mange)
 
-A simple Azure function to manage Azure cloud instances,it allows users to schedule VM startup and shutdown process, email notifications are provided usinng [Sendgrid](https://sendgrid.com/docs).
+A simple Azure function to manage Azure cloud instances,it allows users to schedule VM startup and shutdown process and send notification emails before stratup/shutdown.Notifications are provided using [Sendgrid](https://sendgrid.com/docs).
 
-VM config info will be provided as input in a YML file, including starup and shutdown timings.
+VM config info will be provided as input in a YML file, including startup and shutdown timings.
 
 ## Features
 
@@ -24,7 +24,7 @@ After creating the function app , deploy the app from github directly.
 ```
 az functionapp deployment source config --name <function App name> --resource-group <resource group name> --branch master --repo-url https://github.com/nandakola/aCloudManage --manual-integration
 ```
-Hang on tight , it will take sometime... once the dpeloyment is completed got to Azure portal and stop the app , we need to update the Azure configuration before we run it.
+Hang on tight, it will take sometime... once the deployment is completed got to Azure portal and stop the app, we need to update the Azure configuration before we run it.
 
 Azure function app screen you will find an URL to the function app, copy that it will look something like bellow.
 
@@ -36,7 +36,7 @@ Add .scm after functionappname and access [kudu](https://github.com/projectkudu/
 
 once you are in kudu click on "Debug console" -> "PowerShell" this will allow you to browse the site assets that you deployed using Azure CLI.
 
-now go to "site" -> "wwwroot" -> "aManageTrigger "  and click edit button for  "amcloud.yml" this is where most of the configurations are, you need to update this with your severs information annd start/stop timings.
+now go to "site" -> "wwwroot" -> "aManageTrigger"  and click edit button for  "amcloud.yml" this is where most of the configurations are, you need to update this with your severs information and start/stop timings. Below configuration talks about on how to update this file.
 
 
 ## Configuration
@@ -58,12 +58,14 @@ domain : '<tenantId>'
 secret : '<clientSecret>'
 subscriptionId : '<subscriptionId>'
 ```
-Register with sendgrid and update the sendgridKey.
+service principle allows the app to  deploy or configure resources through Azure Resource Manager in Azure Stack, in our case we are trying to manipulate the state of the resource.
+
+To send emails form the function we need to Register with sendgrid and update the sendgridKey.
 ```
 sendgridKey : <sendgridKey>
 ```
 
-Update the VM info under serverSchedule in YML file(One object per insatnce).
+Now finally add the resources that you would like to controll using this fucntion, all parameters are mandatory.
 
 ```
 serverSchedule:
@@ -86,6 +88,8 @@ serverSchedule:
 Update email config info as per your requirements, right now AcloudManage is scheduled to send an email before the server startup/shutdown and one email as a remainder just before the 30 mins of the schedule startup/shutdown.(Its hard coded feel free to modify according to your requirements.)
 
 Finally update the "AzureWebJobsStorage" parameter in "local.settings.json" with one storage URL form your account.(this is the only configuration outside amcloud.yml)
+
+>Note : function runs in UTC , if you want to run it in your time zone add the time zone parameter to azure app settings. Ex : Azure app Application settings, i added “WEBSITE_TIME_ZONE” : "Eastern Standard Time"
 
 # About Azure TimerTrigger - JavaScript
 
