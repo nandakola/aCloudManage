@@ -10,6 +10,7 @@ VM config info will be provided as input in a YML file, including startup and sh
 - Send emails before startup/shutdown
 - Send reminder emails
 - Weekend enable/disable schedule
+- Change the startup/shutdown config via kudu anytime.
 
 ## Usage
 
@@ -91,6 +92,8 @@ Update email config info as per your requirements, right now AcloudManage is sch
 Finally update the "AzureWebJobsStorage" parameter in "local.settings.json" with one storage URL form your account.(this is the only configuration outside amcloud.yml)
 
 >Note : function runs in UTC , if you want to run it in your time zone add the time zone parameter to azure app settings. Ex : Azure app Application settings, i added “WEBSITE_TIME_ZONE” : "Eastern Standard Time"
+
+login to Azure portal and start the fucntion, if you wnat to chnage the scheduled time simply login to kudu and change it , no need to stop the function.
 
 # About Azure TimerTrigger - JavaScript
 
