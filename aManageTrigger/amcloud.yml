@@ -9,14 +9,14 @@ userName: Nanda
 
 #sendgridKey : <send grid Key>
 
-
+    
 serverSchedule:
   - instanceName : Dhani-UB-001
     resourceGroupName : Rs-Group-01
     startTime : "12:10" #in quotes 24 hr format
     shutDownTime: "12:20" #in quotes 24 hr format
-    includeWeekends : true
-    enable : true
+    includeWeekends : false #make it false if youdont want to start the servers on the weekends
+    enable : true # Not implemented Yet
   
   - instanceName : Nan-UB-001
     resourceGroupName : Rs-Group-02

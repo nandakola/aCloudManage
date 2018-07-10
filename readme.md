@@ -9,6 +9,7 @@ VM config info will be provided as input in a YML file, including startup and sh
 - Schedule server startup/shutdown
 - Send emails before startup/shutdown
 - Send reminder emails
+- Weekend enable/disable schedule
 
 ## Usage
 
@@ -73,15 +74,15 @@ serverSchedule:
     resourceGroupName : <Resource Group of the Instance>
     startTime : "12:20" #in quotes 24 hr format
     shutDownTime: "12:30" #in quotes 24 hr format
-    includeWeekends : true # Not yet implimented
+    includeWeekends : true # change it to false to disable the schedule on weekends
     enable : true
   
   - instanceName : 
     resourceGroupName : 
     startTime : "12:20" #in quotes 24 hr format
     shutDownTime: "12:30" #in quotes 24 hr format
-    includeWeekends : true # Not yet implimented
-    enable : true
+    includeWeekends : true # change it to false to disable the schedule on weekends
+    enable : true # Not yet implimented
 
     ....
 ```

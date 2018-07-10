@@ -31,9 +31,15 @@ module.exports = function (context, myTimer) {
                 computeClient = new ComputeManagementClient(credentials, file.subscriptionId);
                 var d = new Date();
                 var today = new Date();                
-                //console.log(file.sendgrid.uName+"****"+file.sendgrid.password);            
-                context.log('hello ' + file.serverSchedule);
+                console.log("today is ****"+today.getDay());            
+                
                 for (var i = 0; i < file.serverSchedule.length; i++) {
+                    context.log('hello ' + file.serverSchedule[i].includeWeekends);
+                    if (!file.serverSchedule[i].includeWeekends) {
+                        if(today.getDay()===0 || today.getDay() === 6){
+                            continue; 
+                        }                        
+                    }
                     context.log(file.serverSchedule[i].instanceName);
                     //Check Startserver schedule                        
                     var s = file.serverSchedule[i].startTime.split(":");
